@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
         {
-            name: 'Uchronie',
+            name: 'michel-debray-chauvin',
             script: './bin/www',
             mode: 'cluster',
             autorestart: true,
