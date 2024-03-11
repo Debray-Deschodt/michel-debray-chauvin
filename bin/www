@@ -1,0 +1,49 @@
+const http = require('http')
+const https = require('https')
+const app = require('../app')
+const fs = require('fs')
+const env = require('../environment/' + process.env.NODE_ENV)
+const socketio = require('socket.io')
+
+http.createServer((req, res) => {
+    res.writeHead('301', { Location: `https://${req.headers.host}${req.url}` })
+    res.end()
+}).listen(80)
+
+const server = https.createServer(
+    {
+        key: fs.readFileSync(env.key),
+        cert: fs.readFileSync(env.cert)
+    },
+    app
+)
+
+server.listen(443)
+exports.server = server
+
+const ios = socketio(server)
+const msg = ios.of('/msg')
+const lobby = ios.of('/lobby')
+
+msg.on('connect', (socket) => {
+    socket.on('join', (data) => {
+        socket.join(data.gameId + data.userNumber)
+    })
+
+    socket.on('msgTrigger', (data) => {
+        msg.to(data.gameId + data.userNumber).emit('msgTrigger')
+    })
+})
+
+lobby.on('connect', (socket) => {
+    socket.on('join', (data) => {
+        socket.join(data.gameId)
+    })
+
+    socket.on('settingsTrigger', (data) => {
+        socket.to(data.gameId).emit('settingsTrigger', data)
+    })
+    socket.on('readyTrigger', (data) => {
+        lobby.to(data.gameId).emit('readyTrigger')
+    })
+})
