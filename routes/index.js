@@ -5,6 +5,7 @@ const contact = require('./contact')
 
 router.use('/contact', contact)
 router.use('/', (req, res) => {
+    console.log(req)
     res.sendFile(path.join(__dirname, '../client-build/index.html'))
 })
 
