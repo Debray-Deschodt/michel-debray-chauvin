@@ -11,7 +11,7 @@ router.use('/pict', pict)
 router.use('/contact', contact)
 router.use('/login', login)
 router.use('/auth', auth)
-// router.use('/users', users)
+router.use('/users', users)
 
 router.use('/', (req, res) => {
     console.log(req.ip)
