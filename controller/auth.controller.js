@@ -4,7 +4,6 @@ const { findUserPerSessionId } = require('../queries/user.queries')
 
 exports.sessionNew = async (req, res, next) => {
     try {
-        console.log(req.signedCookies['connect.sid'])
         const user = await findUserPerSessionId(
             req.signedCookies['connect.sid']
         )
@@ -13,9 +12,8 @@ exports.sessionNew = async (req, res, next) => {
         })
         const date = new Date()
         date.setHours(date.getHours() + 2)
-        console.log(user.local.email, date.toUTCString())
     } catch (e) {
-        console.log(e)
+        console.error(e)
         res.status(403).end()
     }
 }
@@ -31,9 +29,8 @@ exports.sessionNew = async (req, res, next) => {
 //         })
 //         const date = new Date()
 //         date.setHours(date.getHours() + 2)
-//         console.log(user.local.email, date.toUTCString())
 //     } catch (e) {
-//         console.log(e)
+//         console.error(e)
 //         res.status(403).end()
 //     }
 // }

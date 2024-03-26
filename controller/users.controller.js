@@ -6,7 +6,7 @@ exports.userCreate = async (req, res, next) => {
         const user = await createUser(body)
         res.end()
     } catch (e) {
-        console.log(e)
+        console.error(e)
         res.json({ error: "Il y a déjà quelqu'un qui s'appelle comme toi" })
     }
 }

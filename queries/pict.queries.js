@@ -7,7 +7,6 @@ exports.addPict = async (id) => {
             pict.weight++
             await Pict.findOneAndUpdate({ id: id }, pict)
         } else {
-            console.log(id)
             pict = new Pict({ id: id })
             await pict.save()
         }

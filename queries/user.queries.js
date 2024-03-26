@@ -28,9 +28,8 @@ exports.findUserPerEmail = async (email) => {
 exports.findUserPerSessionId = async (id) => {
     try {
         const session = await findSessionPerId(id)
-        console.log(session)
         return User.findOne({ _id: JSON.parse(session.session).passport.user })
     } catch (e) {
-        console.log(e)
+        console.error(e)
     }
 }

@@ -25,12 +25,11 @@ exports.sessionCreate = (req, res, next) => {
                 } else {
                     const user = findUserPerEmail(req.body.email)
                         .then((document) => {
-                            console.log('logged! : ', document)
                             res.json({
                                 username: document.local.email
                             })
                         })
-                        .catch((e) => console.log(e))
+                        .catch((e) => console.error(e))
                 }
             })
         }
@@ -48,9 +47,8 @@ exports.sessionNew = async (req, res, next) => {
         })
         const date = new Date()
         date.setHours(date.getHours() + 2)
-        console.log(user.local.email, date.toUTCString())
     } catch (e) {
-        console.log(e)
+        console.error(e)
         res.status(403).end()
     }
 }
@@ -60,6 +58,5 @@ exports.sessionNew = async (req, res, next) => {
  * @body {string} password
  */
 exports.getLoginView = async (req, res, next) => {
-    console.log('loginViewSend')
     res.sendFile(path.join(__dirname, '../login-build/index.html'))
 }
