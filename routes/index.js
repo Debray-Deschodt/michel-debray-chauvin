@@ -14,8 +14,27 @@ router.use('/auth', auth)
 router.use('/users', users)
 
 router.use('/', (req, res) => {
-    console.log(req.ip)
-    res.sendFile(path.join(__dirname, '../client-build/index.html'))
+    console.log(req.headers.host)
+    switch (req.hostname) {
+        case 'localhost':
+            res.sendFile(
+                path.join(
+                    __dirname,
+                    '../build/michel-debray-chauvin/client-build/index.html'
+                )
+            )
+            break
+        case 'michel-debray-chauvin.com':
+            res.sendFile(
+                path.join(
+                    __dirname,
+                    '../build/michel-debray-chauvin/client-build/index.html'
+                )
+            )
+            break
+        case 'krasky.io':
+            res.sendFile(path.join(__dirname, '../build/krasky/index.html'))
+    }
 })
 
 module.exports = router
