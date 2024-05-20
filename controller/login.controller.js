@@ -58,5 +58,10 @@ exports.sessionNew = async (req, res, next) => {
  * @body {string} password
  */
 exports.getLoginView = async (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../login-build/index.html'))
+    res.sendFile(
+        path.join(
+            __dirname,
+            '../build/michel-debray-chauvin/login-build/index.html'
+        )
+    )
 }
