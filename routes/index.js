@@ -32,8 +32,22 @@ router.use('/', (req, res) => {
                 )
             )
             break
+        case 'www.michel-debray-chauvin.com':
+            res.sendFile(
+                path.join(
+                    __dirname,
+                    '../build/michel-debray-chauvin/client-build/index.html'
+                )
+            )
+            break
         case 'krasky.io':
-            res.sendFile(path.join(__dirname, '../build/krasky/index.html'))
+            res.sendFile(
+                path.join(__dirname, '../build/krasky/client-build/index.html')
+            )
+        case 'www.krasky.io':
+            res.sendFile(
+                path.join(__dirname, '../build/krasky/client-build/index.html')
+            )
     }
 })
 
