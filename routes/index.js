@@ -13,8 +13,7 @@ router.use('/login', login)
 router.use('/auth', auth)
 router.use('/users', users)
 
-router.use('/', (req, res) => {
-    console.log(req.headers.host)
+router.use('/', async (req, res) => {
     switch (req.hostname) {
         case 'localhost':
             res.sendFile(
