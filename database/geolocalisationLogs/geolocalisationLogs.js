@@ -29,7 +29,6 @@ exports.addConnectionLog = async (ip) => {
 
     if (await checkConnectionSeniority()) {
         try {
-            console.log('lunch')
             const APIKEY =
                 'e5fa94db56594b246586bc25d8b7dfc17d46747ad39fd6f1787599ae'
             const bundle = await axios.get(
