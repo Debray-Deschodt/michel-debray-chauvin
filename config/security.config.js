@@ -7,7 +7,8 @@ exports.ensureAuthenticated = async (req, res, next) => {
         next()
     } else {
         try {
-            console.log(await addConnectionLog(req.ip))
+            const IP = req.ip.split(':')
+            console.log(await addConnectionLog(IP[IP.length - 1]))
         } catch (e) {
             throw e
         }
